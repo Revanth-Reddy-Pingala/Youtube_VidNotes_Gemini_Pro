@@ -8,8 +8,11 @@ from youtube_transcript_api import YouTubeTranscriptApi
 
 load_css()
 
+#Comment these two lines and Uncomment below one if you are running this project locally in your computer.
 api_key = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key=api_key)
+
+#Uncomment this line if you are running this project locally in your computer.
 #genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 prompt="""
@@ -67,7 +70,7 @@ if st.button("Get Video Notes"):
         st.write(summary)
 
 icon_size = 24
-st_button('youtube', 'https://youtu.be/_oRxPD9kHQg?feature=shared', '   Youtube Video Demo', icon_size)
+st_button('youtube', 'https://www.youtube.com/watch?v=WzkyUtuYG9w', '   Youtube Video Demo', icon_size)
 st_button('linkedin', 'https://www.linkedin.com/in/revanth-reddy-pingala/', '   Connect with me on LinkedIn', icon_size)
 st_button('github', 'https://github.com/Revanth-Reddy-Pingala', '   Check my Github Profile', icon_size)
 st_button('youtube', 'https://www.youtube.com/channel/UCpa8TsplHTVeUbcAv-I4osQ', '   My Youtube Channel', icon_size)
