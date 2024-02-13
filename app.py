@@ -9,11 +9,14 @@ from youtube_transcript_api import YouTubeTranscriptApi
 load_css()
 
 #Comment these two lines and Uncomment below one if you are running this project locally in your computer.
+
 api_key = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key=api_key)
 
 #Uncomment this line if you are running this project locally in your computer.
 #genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
+#Change the prompt according to your usage
 
 prompt="""
         Title: Detailed Notes from YouTube Video Transcript
@@ -34,8 +37,16 @@ prompt="""
 def extract_transcript_details(youtube_video_url):
     try:
         video_id=youtube_video_url.split("=")[1]
-        
-        transcript_text=YouTubeTranscriptApi.get_transcript(video_id)
+
+        # use this line if you want to give only English youtube videos.
+        #transcript_text=YouTubeTranscriptApi.get_transcript(video_id)
+            
+        # this part converts any videos having any language transcript to English Transcript.
+            
+        transcript_list=YouTubeTranscriptApi.list_transcripts(video_id)
+        for transcript in transcript_list:
+            transcript_text=transcript.fetch()
+            transcript_text=transcript.translate('en').fetch()
 
         transcript = ""
         for i in transcript_text:
@@ -53,7 +64,7 @@ def generate_gemini_content(transcript_text,prompt):
     return response.text
 
 st.title("𝚈𝚘𝚞𝚝𝚞𝚋𝚎 VidNotes 📝📚")
-st.info("Youtube Video 🎥 Transcript to Detailed Notes 📋 Converter using Google Gemini Pro. This web app efficiently works with videos having English Transcript and Generates notes 🚀. Support for other languages not yet provided. Please enter the YouTube video link in the Text Box and Click on the button to get the detailed notes.")
+st.info("Youtube Video 🎥 Transcript to Detailed Notes 📋 Converter using Google Gemini Pro. This web app efficiently works with videos having any language Transcript, then translates to English Transcript and Generates notes 🚀. Please enter the YouTube video link in the Text Box and Click on the button to get the detailed notes.")
 youtube_link = st.text_input("Enter YouTube Video Link:")
 
 if youtube_link:
