@@ -2,7 +2,7 @@
 ## Project Description
 - Youtube Video 🎥 Transcript to Detailed Notes 📋 Converter using Google Gemini Pro. 
 
-- This web app efficiently works with videos having English Transcript and Generates notes 🚀. Support for other languages not yet provided.
+- This web app efficiently works with videos having any language Transcript, then translates to English Transcript and Generates notes 🚀.
 ## Tech Stack Used
 - Python, CSS, Streamlit
 - VS Code with Conda environment
